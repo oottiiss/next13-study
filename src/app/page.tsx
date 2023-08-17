@@ -1,12 +1,9 @@
-import os from 'os'; // 노드 api
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
 import Grid from '@/components/layout/Grid';
-// import { useState } from 'react';
+import Button from '@/components/atoms/Button';
 
 export default function Home() {
-  console.log('안녕!');
-  console.log(os.hostname());
   return (
     <>
       <Box $marginTop={{ base: 1, md: 2 }}>
@@ -29,6 +26,19 @@ export default function Home() {
           <div>4</div>
           <div>5</div>
         </Grid>
+
+        <Button
+          $marginTop='20px'
+          $backgroundColor='rgb(245,191,65)'
+          $color='#fff'
+          $fontWeight='bold'
+          $borderRadius='60px'
+          $pseudoClass={{
+            $hover: { $backgroundColor: 'red' },
+          }}
+        >
+          테스트 버튼
+        </Button>
       </Box>
     </>
   );

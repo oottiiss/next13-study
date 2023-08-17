@@ -1,9 +1,8 @@
 import type { Preview } from '@storybook/react';
 import { withThemeFromJSXProvider } from '@storybook/addon-styling';
-import { createGlobalStyle } from 'styled-components';
-import { ThemeProvider } from '../src/themes';
-import * as NextImage from 'next/image';
-import React from 'react';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { theme } from '../src/themes';
+import { unoptimizeNextImageForStorybook } from '../src/components/atoms/Image';
 
 const GlobalStyles = createGlobalStyle`
   html,
@@ -25,7 +24,6 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const preview: Preview = {
-  // decorators:
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
@@ -38,23 +36,12 @@ const preview: Preview = {
   decorators: [
     withThemeFromJSXProvider({
       Provider: ThemeProvider,
+      themes: { theme },
       GlobalStyles,
     }),
   ],
 };
 
-const OriginalNextImage = NextImage.default;
-
-Object.defineProperty(NextImage, 'default', {
-  configurable: true,
-  value: (props) =>
-    typeof props.src === 'string'
-      ? React.createElement(OriginalNextImage, {
-          ...props,
-          unoptimized: true,
-          blurDataURL: props.src,
-        })
-      : React.createElement(OriginalNextImage, { ...props, unoptimized: true }),
-});
+unoptimizeNextImageForStorybook();
 
 export default preview;
