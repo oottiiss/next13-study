@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    appDir: true,
+  },
   reactStrictMode: true,
   // styledComponents compiler
   compiler: (() => {
@@ -26,9 +29,6 @@ const nextConfig = {
         destination: `${process.env.API_BASE_URL}/:match*`,
       },
     ];
-  },
-  experimental: {
-    appDir: true,
   },
 };
 
