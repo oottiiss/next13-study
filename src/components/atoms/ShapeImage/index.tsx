@@ -10,14 +10,10 @@ export const ImageWithShape = styled(UnoptimizedImage)<{ shape?: ImageShape }>`
   border-radius: ${({ shape }) => (shape === 'circle' ? '50%' : '0')};
 `;
 
-export const ShapeImage = (props: ShapeImageProps) => {
-  const { shape, ...imageProps } = props;
+const ShapeImage = (props: ShapeImageProps) => {
+  const { shape = 'square', ...imageProps } = props;
 
   return <ImageWithShape shape={shape} {...imageProps} />;
-};
-
-ShapeImage.defaultProps = {
-  shape: 'square',
 };
 
 export default ShapeImage;
